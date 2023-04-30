@@ -6,40 +6,11 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/04/28 20:27:10 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:16:27 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putstr(char *s)
-{
-	if (!s)
-		return ;
-	while (*s)
-	{
-		write(1, s, 1);
-		s++;
-	}
-}
-
-void	ft_errprint(char *message)
-{
-	ft_putstr(message);
-	exit(1);
-}
+#include "push_swap.h"
 
 int	arg_validate(char *arg)
 {
@@ -67,40 +38,10 @@ int	arg_validate(char *arg)
 	return (1);
 }
 
-char	*ft_argjoin(char **argv, int argc)
-{
-	char	*newstr;
-	int		i;
-	int		j;
-	int		len;
-
-	i = 0;
-	len = 0;
-	while (++i < argc)
-		len += ft_strlen(argv[i]) + 2;
-	newstr = malloc(len + 1);
-	if (!newstr)
-		ft_errprint("Error. Memory alocating error.");
-	newstr[len] = '\0';
-	i = 1;
-	len = 0;
-	while (i < argc)
-	{
-		j = 0;
-		newstr[len++] = ' ';
-		while (argv[i][j])
-			newstr[len++] = argv[i][j++];
-		newstr[len++] = ' ';
-		i++;
-		
-	}
-	return (newstr);
-}
-
 int	main(int argc, char **argv)
 {
-	int	i;
-	// t_node	*stack_a;
+	int		i;
+	t_node	*stack_a;
 
 	i = 1;
 	if (argc == 1)
@@ -111,10 +52,6 @@ int	main(int argc, char **argv)
 			ft_errprint("Error. Wrong arguments format.\n");
 		i++;
 	}
-	printf("111\n");
-	printf("222\n");
-	printf("%s\n", ft_argjoin(argv, argc));
-	// stack_a = ft_split(ft_argjoin(argv, argc));
-	// sorting(stack_a);
+	stack_a = ft_split_to_stack(ft_argjoin(argv, argc), NULL);
 	return (0);
 }
