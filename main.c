@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/02 19:35:10 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:17:10 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	stack_a = ft_split_to_stack(ft_argjoin(argv, argc), NULL);
+	rotate("ra", &stack_a);
 	push("pb", &stack_a, &stack_b);
-	push("pb", &stack_a, &stack_b);
-	push("pb", &stack_a, &stack_b);
-	printf("%d - stack_a value, %d - stack_b\n", stack_a->val, stack_b->val);
-	printf("%d - stack_a value, %d - second, %d - prev\n", stack_b->val, stack_b->next->val, stack_b->next->prev->val);
 	return (0);
 }
