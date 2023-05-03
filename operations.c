@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:23:02 by almeliky          #+#    #+#             */
-/*   Updated: 2023/04/30 21:48:18 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:40:22 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,36 @@ void	swap(char *command, t_node *stack)
 		stack->next->val = swap;
 	}
 	if (command)
-		ft_putstr("%s\n", command);
+	{
+		ft_putstr(command);
+		ft_putstr("\n");
+	}
 }
 
 void	s_swap(t_node *stack_a, t_node *stack_b)
 {
 	swap(NULL, stack_a);
-	swap(NULL, stack_a);
+	swap(NULL, stack_b);
 	ft_putstr("ss\n");
 }
 
-void	push(char *command, t_node *stack_a, t_node *stack_b)
+void	push(char *command, t_node **from, t_node **to)
 {
 	t_node *swap;
-	if (command == "pb")
+
+	if (*from == NULL)
+		return ;
+	swap = *from;
+	*from = (*from)->next;
+	(*from)->prev = swap->prev;
+	(*from)->prev->next = *from;
+	swap->next = *to;
+	if (*to != NULL)
 	{
-		stack_a->prev->next = stack_a->next;
-		stack_a->next->prev = stack_a->prev;
-		swap = stack_b;
-		stack_b = stack_a;
-		stack_b->next = swap;
-		stack_b->prev = swap->prev;
-		swap->prev->next = stack_b;
-		swap->prev = stack_b;
+		(*to)->prev->next = swap;
+		swap->prev = (*to)->prev;
 	}
-	else
-	{
-		stack_b->prev->next = stack_b->next;
-		stack_b->next->prev = stack_b->prev;
-		swap = stack_a;
-		stack_a = stack_b;
-		stack_a->next = swap;
-		stack_a->prev = swap->prev;
-		swap->prev->next = stack_a;
-		swap->prev = stack_a;
-	}
-	if (command == "pb" || command == "pa")
-		ft_putstr(command);
+	*to = swap;
+	ft_putstr(command);
+	ft_putstr("\n");
 }

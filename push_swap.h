@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:06:13 by almeliky          #+#    #+#             */
-/*   Updated: 2023/04/30 20:11:14 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/02 19:00:14 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,10 @@ char	*ft_argjoin(char **argv, int argc);
 t_node	*ft_newnode(char *str, t_node *prev, int len);
 t_node	*ft_split_to_stack(char *str, t_node *start);
 int		main(int argc, char **argv);
+void	swap(char *command, t_node *stack);
+void	s_swap(t_node *stack_a, t_node *stack_b);
+void	push(char *command, t_node **stack_a, t_node **stack_b);
+void	rotate(char *command, t_node **stack);
+void 	rotate_r(char *command, t_node **stack_a, t_node **stack_b);
 
 #endif
