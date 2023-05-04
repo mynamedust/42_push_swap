@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:15:30 by almeliky          #+#    #+#             */
-/*   Updated: 2023/04/30 20:15:56 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:59:24 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_argjoin(char **argv, int argc)
 	return (newstr);
 }
 
-t_node	*ft_newnode(char *str, t_node *prev, int len)
+t_node	*ft_newnode(char *str, t_node *prev, int len, int count)
 {
 	char	*number;
 	t_node	*newnode;
@@ -64,11 +64,29 @@ t_node	*ft_newnode(char *str, t_node *prev, int len)
 		ft_errprint("Error. Memory allocating failed.");
 	newnode->val = ft_atoi(number);
 	newnode->prev = prev;
+	newnode->listsize = count;
 	free(number);
 	return (newnode);
 }
 
-t_node	*ft_split_to_stack(char *str, t_node *start)
+int	listsize(char *str)
+{
+	int	count;
+
+	count = 0;
+	while (*str)
+	{
+		while (*str && *str == ' ')
+			str++;
+		if (*str && *str != ' ')
+			count++;
+		while (*str && *str != ' ')
+			str++;
+	}
+	return (count);
+}
+
+t_node	*ft_split_to_stack(char *str, t_node *start, int count)
 {
 	t_node	*node;
 
@@ -79,10 +97,10 @@ t_node	*ft_split_to_stack(char *str, t_node *start)
 		if (*str && *str != 0)
 		{
 			if (!start)
-				node = ft_newnode(str, node, 0);
+				node = ft_newnode(str, node, 0, count);
 			else
 			{
-				node->next = ft_newnode(str, node, 0);
+				node->next = ft_newnode(str, node, 0, count);
 				node = node->next;
 			}
 		}
@@ -93,6 +111,5 @@ t_node	*ft_split_to_stack(char *str, t_node *start)
 	}
 	node->next = start;
 	start->prev = node;
-	// free(str);
 	return (start);
 }

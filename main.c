@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/03 21:17:10 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:10:14 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 	int		i;
 	t_node	*stack_a;
 	t_node	*stack_b = NULL;
+	char	*str;
 
 	i = 1;
 	if (argc == 1)
@@ -53,8 +54,11 @@ int	main(int argc, char **argv)
 			ft_errprint("Error. Wrong arguments format.\n");
 		i++;
 	}
-	stack_a = ft_split_to_stack(ft_argjoin(argv, argc), NULL);
-	rotate("ra", &stack_a);
-	push("pb", &stack_a, &stack_b);
+	str = ft_argjoin(argv, argc);
+	i = listsize(str);
+	stack_a = ft_split_to_stack(str, NULL, i);
+	free(str);
+	numbers_simplify(&stack_a, i);
+	sorting(&stack_a, &stack_b, i);
 	return (0);
 }
