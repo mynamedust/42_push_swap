@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/04 17:10:14 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:26:40 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,80 @@ int	arg_validate(char *arg)
 	return (1);
 }
 
+int	double_check(t_node *stack, int lsize)
+{
+	int	i;
+	int	num;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i++ < lsize)
+	{
+		num = stack->val;
+		while (++j < lsize)
+		{
+			stack = stack->next;
+			if (stack->val == num)
+				return (1);
+		}
+		j = 0;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
-	t_node	*stack_a;
-	t_node	*stack_b = NULL;
-	char	*str;
+	t_state	pstate;
 
-	i = 1;
+	pstate.stack_b = NULL;
+	i = 0;
 	if (argc == 1)
 		exit(0);
-	while (i < argc)
+	while (++i < argc)
 	{
 		if (!arg_validate(argv[i]))
 			ft_errprint("Error. Wrong arguments format.\n");
-		i++;
 	}
-	str = ft_argjoin(argv, argc);
-	i = listsize(str);
-	stack_a = ft_split_to_stack(str, NULL, i);
-	free(str);
-	numbers_simplify(&stack_a, i);
-	sorting(&stack_a, &stack_b, i);
+	pstate.argstr = ft_argjoin(argv, argc);
+	i = listsize((&pstate)->argstr);
+	pstate.stack_a = ft_split_to_stack(&pstate, (&pstate)->argstr, NULL, i);
+	if (double_check(pstate.stack_a, i))
+		clear_exit("Error. Arguments must not be duplicated.",
+			&pstate, NULL);
+	if (check_order(pstate.stack_a, i))
+		exit(0);
+	free((&pstate)->argstr);
+	numbers_simplify(&(&pstate)->stack_a, i);
+	sorting(&(&pstate)->stack_a, &(&pstate)->stack_b, i, 0);
 	return (0);
 }
+
+// int	main(int argc, char **argv)
+// {
+// 	int		i;
+// 	t_node	*stack_a;
+// 	t_node	*stack_b = NULL;
+// 	char	*str;
+
+// 	i = 0;
+// 	if (argc == 1)
+// 		exit(0);
+// 	while (++i < argc)
+// 	{
+// 		if (!arg_validate(argv[i]))
+// 			ft_errprint("Error. Wrong arguments format.\n");
+// 	}
+// 	str = ft_argjoin(argv, argc);
+// 	i = listsize(str);
+// 	stack_a = ft_split_to_stack(str, NULL, i);
+// 	free(str);
+// 	if (double_check(stack_a, i))
+// 		exit(1);
+// 	if (check_order(stack_a, i))
+// 		exit(0);
+// 	numbers_simplify(&stack_a, i);
+// 	sorting(&stack_a, &stack_b, i, 0);
+// 	return (0);
+// }

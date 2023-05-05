@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:15:30 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/04 15:59:24 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/05 21:23:08 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_argjoin(char **argv, int argc)
 	return (newstr);
 }
 
-t_node	*ft_newnode(char *str, t_node *prev, int len, int count)
+t_node	*ft_newnode(char *str, t_state *st, int len, int count)
 {
 	char	*number;
 	t_node	*newnode;
@@ -52,7 +52,7 @@ t_node	*ft_newnode(char *str, t_node *prev, int len, int count)
 		len++;
 	number = malloc(len + 1);
 	if (!number)
-		ft_errprint("Error. Memory allocating failed.");
+		clear_exit("Error. Memory allocating failed.", st, NULL);
 	number[len] = '\0';
 	while (i < len)
 	{
@@ -61,9 +61,9 @@ t_node	*ft_newnode(char *str, t_node *prev, int len, int count)
 	}
 	newnode = malloc(sizeof(t_node));
 	if (!newnode)
-		ft_errprint("Error. Memory allocating failed.");
-	newnode->val = ft_atoi(number);
-	newnode->prev = prev;
+		clear_exit("Error. Memory allocating failed.", st, number);
+	newnode->val = ft_atoi(number, st);
+	newnode->prev = st->stack_a;
 	newnode->listsize = count;
 	free(number);
 	return (newnode);
@@ -86,10 +86,8 @@ int	listsize(char *str)
 	return (count);
 }
 
-t_node	*ft_split_to_stack(char *str, t_node *start, int count)
+t_node	*ft_split_to_stack(t_state *st, char *str, t_node *start, int count)
 {
-	t_node	*node;
-
 	while (*str)
 	{
 		while (*str == ' ')
@@ -97,19 +95,19 @@ t_node	*ft_split_to_stack(char *str, t_node *start, int count)
 		if (*str && *str != 0)
 		{
 			if (!start)
-				node = ft_newnode(str, node, 0, count);
+				st->stack_a = ft_newnode(str, st, 0, count);
 			else
 			{
-				node->next = ft_newnode(str, node, 0, count);
-				node = node->next;
+				st->stack_a->next = ft_newnode(str, st, 0, count);
+				st->stack_a = st->stack_a->next;
 			}
 		}
 		if (!start)
-			start = node;
+			start = st->stack_a;
 		while (*str && *str != ' ')
 			str++;
 	}
-	node->next = start;
-	start->prev = node;
+	st->stack_a->next = start;
+	start->prev = st->stack_a;
 	return (start);
 }
