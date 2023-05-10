@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:06:13 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/07 17:13:32 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:43:24 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_node {
 	int				val;
@@ -54,7 +55,7 @@ void 	numbers_simplify(t_node **stack, int lsize);
 void	sorting(t_node **stack_a, t_node **stack_b, int lsize, int j);
 int		check_order(t_node *stack, int lsize);
 void	clear_exit(char *error, t_state *st, char *str);
-void	clear_stack(t_node *stack);
+void	clear_stack(t_node **stack);
 void	triple_sort(t_node **stack, int max);
 int		find_position(t_node *stack, int value);
 void	five_sort(t_node **stack_a, t_node **stack_b, int lsize);

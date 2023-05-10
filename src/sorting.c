@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:10:32 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/07 20:45:45 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:12:13 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	sorting(t_node **stack_a, t_node **stack_b, int lsize, int j)
 		while (*stack_b != NULL)
 			push("pa", stack_b, stack_a);
 		i++;
-		if (check_order(*stack_a, i))
+		if (check_order(*stack_a, lsize))
 			return ;
 	}
 }

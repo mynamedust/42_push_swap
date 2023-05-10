@@ -8,7 +8,7 @@ SRCS	= 	$(addprefix $(S_DIR), $(SRC))
 OBJS	=	$(addprefix $(O_DIR), $(OBJ))
 INC		=	-I ./includes/
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -g
 
 all: $(O_DIR) $(NAME)
 

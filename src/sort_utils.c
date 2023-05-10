@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:26:45 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/07 20:45:16 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:49:20 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	find_position(t_node *stack, int value)
 		i++;
 		start = start->next;
 	}
-	printf("position - %d", i);
 	return (i);
 }
 

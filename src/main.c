@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/07 18:35:30 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:29:51 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,19 @@ int	double_check(t_node *stack, int lsize)
 	return (0);
 }
 
+void	state_init(t_state *pstate)
+{
+	pstate->stack_b = NULL;
+	pstate->stack_a = NULL;
+	pstate->argstr = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
 	t_state	pstate;
 
-	pstate.stack_b = NULL;
+	state_init(&pstate);
 	i = 0;
 	if (argc == 1)
 		exit(0);

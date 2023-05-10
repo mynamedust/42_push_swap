@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:15:30 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/05 21:23:08 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:04:39 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ t_node	*ft_newnode(char *str, t_state *st, int len, int count)
 		number[i++] = *str;
 		str++;
 	}
+	i = ft_atoi(number, st);
 	newnode = malloc(sizeof(t_node));
 	if (!newnode)
 		clear_exit("Error. Memory allocating failed.", st, number);
-	newnode->val = ft_atoi(number, st);
+	newnode->val = i;
 	newnode->prev = st->stack_a;
 	newnode->listsize = count;
 	free(number);
@@ -106,8 +107,8 @@ t_node	*ft_split_to_stack(t_state *st, char *str, t_node *start, int count)
 			start = st->stack_a;
 		while (*str && *str != ' ')
 			str++;
+		st->stack_a->next = start;
+		start->prev = st->stack_a;
 	}
-	st->stack_a->next = start;
-	start->prev = st->stack_a;
 	return (start);
 }
