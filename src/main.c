@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/10 16:29:51 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:44:47 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,13 @@ int	main(int argc, char **argv)
 	while (++i < argc)
 	{
 		if (!arg_validate(argv[i]))
-			ft_errprint("Error. Wrong arguments format.\n");
+			ft_errprint("Error\n");
 	}
 	pstate.argstr = ft_argjoin(argv, argc);
 	i = listsize((&pstate)->argstr);
 	pstate.stack_a = ft_split_to_stack(&pstate, (&pstate)->argstr, NULL, i);
 	if (double_check(pstate.stack_a, i))
-		clear_exit("Error. Arguments must not be duplicated.",
-			&pstate, NULL);
+		clear_exit("Error\n", &pstate, NULL);
 	if (check_order(pstate.stack_a, i))
 		exit(0);
 	free((&pstate)->argstr);

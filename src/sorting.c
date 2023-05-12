@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 17:10:32 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/10 16:12:13 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:42:14 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	maxbit(t_node *stack, int lsize)
 			maxnum = stack->val;
 		stack = stack->next;
 	}
-	lsize = 8;
+	lsize = sizeof(int) * 8;
 	while (lsize-- >= 0)
 	{
 		if (((maxnum >> lsize) & 1) == 1)

@@ -22,7 +22,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	rm -rf $(OBJ_PATH)
+	rm -rf $(O_DIR)
 
 fclean: clean
 	rm -f $(NAME)

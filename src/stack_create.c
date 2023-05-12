@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:15:30 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/10 20:04:39 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/12 16:05:20 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_argjoin(char **argv, int argc)
 		len += ft_strlen(argv[i]) + 2;
 	newstr = malloc(len + 1);
 	if (!newstr)
-		ft_errprint("Error. Memory alocating error.");
+		ft_errprint("Error\n");
 	newstr[len] = '\0';
 	i = 1;
 	len = 0;
@@ -52,7 +52,7 @@ t_node	*ft_newnode(char *str, t_state *st, int len, int count)
 		len++;
 	number = malloc(len + 1);
 	if (!number)
-		clear_exit("Error. Memory allocating failed.", st, NULL);
+		clear_exit("Error\n", st, NULL);
 	number[len] = '\0';
 	while (i < len)
 	{
@@ -62,7 +62,7 @@ t_node	*ft_newnode(char *str, t_state *st, int len, int count)
 	i = ft_atoi(number, st);
 	newnode = malloc(sizeof(t_node));
 	if (!newnode)
-		clear_exit("Error. Memory allocating failed.", st, number);
+		clear_exit("Error\n", st, number);
 	newnode->val = i;
 	newnode->prev = st->stack_a;
 	newnode->listsize = count;
@@ -107,8 +107,8 @@ t_node	*ft_split_to_stack(t_state *st, char *str, t_node *start, int count)
 			start = st->stack_a;
 		while (*str && *str != ' ')
 			str++;
-		st->stack_a->next = start;
-		start->prev = st->stack_a;
 	}
+	st->stack_a->next = start;
+	start->prev = st->stack_a;
 	return (start);
 }
