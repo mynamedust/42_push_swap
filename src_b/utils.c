@@ -6,21 +6,11 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 20:12:34 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/14 17:34:04 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:31:10 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
 
 void	ft_putstr(char *s)
 {
@@ -82,4 +72,30 @@ void	clear_exit(char *error, t_state *st, char *str)
 	if (error)
 		ft_errprint(error);
 	exit(0);
+}
+
+int	arg_validate(char *arg)
+{
+	int	i;
+	int	num;
+
+	if (!arg || !(arg[0]))
+		return (0);
+	num = 0;
+	i = 0;
+	while (arg[i])
+	{
+		if ((arg[i] < '0' || arg[i] > '9') && arg[i] != '-' && arg[i] != ' ')
+			return (0);
+		if (arg[i] == '-' && (arg[i + 1] < '0' || arg[i + 1] > '9'))
+			return (0);
+		if (arg[i] == '-' && i != 0 && arg[i - 1] != ' ')
+			return (0);
+		if (arg[i] >= '0' && arg[i] <= '9')
+			num++;
+		i++;
+	}
+	if (num <= 0)
+		return (0);
+	return (1);
 }

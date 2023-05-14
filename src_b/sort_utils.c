@@ -6,11 +6,33 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:26:45 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/14 16:58:24 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:20:08 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	double_check(t_node *stack, int lsize)
+{
+	int	i;
+	int	num;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i++ < lsize)
+	{
+		num = stack->val;
+		while (++j < lsize)
+		{
+			stack = stack->next;
+			if (stack->val == num)
+				return (1);
+		}
+		j = 0;
+	}
+	return (0);
+}
 
 int	check_order(t_node *stack, int lsize)
 {

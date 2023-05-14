@@ -6,7 +6,7 @@
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 16:59:21 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/12 15:44:47 by almeliky         ###   ########.fr       */
+/*   Updated: 2023/05/14 17:09:47 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,22 @@ void	state_init(t_state *pstate)
 	pstate->argstr = NULL;
 }
 
+void	choose_sort_alg(int i, t_state *pstate)
+{
+	if (i < 4)
+	{
+		triple_sort(&(pstate)->stack_a, 2);
+		clear_exit(NULL, pstate, NULL);
+	}
+	if (i == 5)
+	{
+		five_sort(&(pstate)->stack_a, &(pstate)->stack_b, i);
+		clear_exit(NULL, pstate, NULL);
+	}
+	sorting(&(pstate)->stack_a, &(pstate)->stack_b, i, 0);
+	clear_exit(NULL, pstate, NULL);
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -74,7 +90,7 @@ int	main(int argc, char **argv)
 
 	state_init(&pstate);
 	i = 0;
-	if (argc == 1)
+	if (argc <= 1)
 		exit(0);
 	while (++i < argc)
 	{
@@ -91,17 +107,6 @@ int	main(int argc, char **argv)
 	free((&pstate)->argstr);
 	(&pstate)->argstr = NULL;
 	numbers_simplify(&(&pstate)->stack_a, i);
-	if (i < 4)
-	{
-		triple_sort(&(&pstate)->stack_a, 2);
-		clear_exit(NULL, &pstate, NULL);
-	}
-	if (i == 5)
-	{
-		five_sort(&(&pstate)->stack_a, &(&pstate)->stack_b, i);
-		clear_exit(NULL, &pstate, NULL);
-	}
-	sorting(&(&pstate)->stack_a, &(&pstate)->stack_b, i, 0);
-	clear_exit(NULL, &pstate, NULL);
+	choose_sort_alg(i, &pstate);
 	return (0);
 }

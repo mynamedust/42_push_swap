@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almeliky <almeliky@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 17:06:13 by almeliky          #+#    #+#             */
-/*   Updated: 2023/05/14 17:23:21 by almeliky         ###   ########.fr       */
+/*   Created: 2023/03/12 17:50:06 by almeliky          #+#    #+#             */
+/*   Updated: 2023/05/14 17:24:17 by almeliky         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
+# include <stddef.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 typedef struct s_node {
 	int				val;
@@ -31,6 +37,18 @@ typedef struct s_state {
 	char	*argstr;
 }	t_state;
 
+void	handle_operations(t_state *pstate, t_node **stack_a, t_node	**stack_b);
+void	do_command(char *com, t_node **stack_a, t_node **stack_b, t_state *st);
+char	*get_next_line(int fd);
+char	*ft_read(int fd, char *stc);
+char	*ft_newline(char *stc);
+char	*ft_ncut(char *stc);
+char	*ft_join(char *s1, char *s2);
+char	*ft_strchr(const char *str, int c);
+int		ft_strlen(const char *str);
+char	*ft_substr(char *s, int start, int len);
+char	*ft_strdup(char *str);
+char	*ft_stcjoin(char *stc, char *buff);
 int		ft_strlen(const char *s);
 void	ft_putstr(char *s);
 int		ft_atoi(char *str, t_state *st);
@@ -61,5 +79,6 @@ void	triple_sort(t_node **stack, int max);
 int		find_position(t_node *stack, int value);
 void	five_sort(t_node **stack_a, t_node **stack_b, int lsize);
 void	choose_sort_alg(int i, t_state *pstate);
+void	print_result(int result);
 
 #endif
